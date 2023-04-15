@@ -18,7 +18,7 @@ JOIN item_vendor vi ON rl.item_vendor_id = vi.item_vendor_id
 JOIN vendor v ON vi.vendor_id = v.vendor_id
 GROUP BY v.vendor_id,v.vendor_name
 ORDER BY total_purchases DESC;
-select * from favorite_vendor_view;
+
 
 --Purchase_Report_view 
 CREATE OR REPLACE VIEW pms.purchase_report_view AS
@@ -57,7 +57,7 @@ inner join pms.address a on a.actor_id=v.vendor_id
 where c.status='A' and a.status='A';
 
 
-CREATE VIEW PMS.FINANCIAL_REPORT_VIEW
+CREATE OR REPLACE VIEW PMS.FINANCIAL_REPORT_VIEW
 AS 
 select 
 jh.fiscal_year,
@@ -81,6 +81,42 @@ order by jh.fiscal_year,jh.accounting_period,jl.account_id,a.account_type,a.acco
 
 GRANT SELECT ON PMS.FINANCIAL_REPORT_VIEW TO public;
 GRANT SELECT ON PMS.FAVORITE_VENDOR_VIEW TO public;
-GRANT SELECT ON PMS.MOSTPURCHASEDITEMS TO public;
+GRANT SELECT ON PMS.MOST_PURCHASED_ITEMS_VIEW TO public;
 GRANT SELECT ON PMS.PURCHASE_REPORT_VIEW TO public;
 GRANT SELECT ON PMS.VENDOR_DETAILS_VIEW TO public;
+
+
+ 
+ 
+ CREATE OR REPLACE FUNCTION PMS.vendor_paid(id IN NUMBER) 
+   RETURN VARCHAR
+   IS VENDOR_NAME VARCHAR(100);
+BEGIN 
+   SELECT SUM(GROSS_AMT) 
+   INTO VENDOR_NAME 
+   FROM PMS.VOUCHER 
+   WHERE VENDOR_ID = ID AND STATUS='PAID'; 
+   
+   RETURN(VENDOR_NAME); 
+ END;
+ 
+ /
+ CREATE OR REPLACE FUNCTION PMS.get_capital(start_date in VARCHAR, end_date in VARCHAR) 
+   RETURN NUMBER
+   IS AMOUNT NUMBER(1,11);
+BEGIN 
+   
+    select sum(amount) 
+    INTO AMOUNT 
+    from pms.ledger
+    where account_id=4000
+    and accounting_date between start_date and end_date
+    order by ledger_id;
+   
+   RETURN(AMOUNT); 
+ END;
+ 
+ /
+ GRANT EXECUTE ON PMS.get_capital TO public;
+ GRANT EXECUTE ON PMS.vendor_paid TO public;
+ 

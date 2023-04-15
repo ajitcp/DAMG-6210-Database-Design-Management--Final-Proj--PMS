@@ -1159,7 +1159,7 @@ exec pms.usp_user_data   ('finance_officer_user','FINANCE_OFFICER','Chris','Hems
 
 exec pms.usp_user_data   ('user_admin_user','USER_ADMIN','Jessica','Chastian','Cedar Rd', 'MA', 9874, 'A',8574142323, 'jessica@yahoo.com', 'A');
 
-exec pms.usp_user_data   ('inventory_admin_user','INVENTORY_ADMIN','Ajith','Patil','Chestnut St', 'MA', 4751, 'A',8574142324, 'AjitPatil@gmail.com', 'A',);
+exec pms.usp_user_data   ('inventory_admin_user','INVENTORY_ADMIN','Ajith','Patil','Chestnut St', 'MA', 4751, 'A',8574142324, 'AjitPatil@gmail.com', 'A');
 
 exec pms.usp_user_data  ('vendor_user_Walmart','VENDOR','Doug','Mcmillon','Cherry Street', 'MA', 4851, 'A',8574142325, 'DougM@yahoo.com', 'A');
 
@@ -1167,9 +1167,9 @@ exec pms.usp_user_data  ('vendor_user_Wayfair','VENDOR','Neeraj','Shah','Birch A
 
 exec pms.usp_user_data ('vendor_user_Pricerite','VENDOR','Joseph','Colalillo','Mission park', 'MA', 41051, 'A',8574142327, 'Joseph@outlook.com', 'A');
 
-exec pms.usp_user_data  ('vendor_user_BestBuy','VENDOR','Corie','Barry','Spruce Street', 'MA', 41151, 'A'8574142328, 'coriebarry@gmail.com', 'A');
+exec pms.usp_user_data  ('vendor_user_BestBuy','VENDOR','Corie','Barry','Spruce Street', 'MA', 41151, 'A',8574142328, 'coriebarry@gmail.com', 'A');
 
-exec pms.usp_user_data ('vendor_user_Staples','VENDOR','John','Lederer', 'Peach street', 'MA', 41251, 'A',8574142329, 'JohnLed@yahoo.com', 'A',);
+exec pms.usp_user_data ('vendor_user_Staples','VENDOR','John','Lederer', 'Peach street', 'MA', 41251, 'A',8574142329, 'JohnLed@yahoo.com', 'A');
 
 --Item Insert
 
@@ -1233,7 +1233,7 @@ DECLARE
 BEGIN
   PMS.usp_create_requisition(req_creator_id, reqi_desc, item_vendor_id, quantity, req_approver_id);
 END;
-
+/
 DECLARE
   req_creator_id NUMBER := 2;
   req_approver_id NUMBER := 1;
@@ -1244,7 +1244,7 @@ DECLARE
 BEGIN
   PMS.usp_create_requisition(req_creator_id, reqi_desc, item_vendor_id, quantity, req_approver_id);
 END;
-
+/
 DECLARE
   req_creator_id NUMBER := 2;
   req_approver_id NUMBER := 1;
@@ -1255,7 +1255,7 @@ DECLARE
 BEGIN
   PMS.usp_create_requisition(req_creator_id, reqi_desc, item_vendor_id, quantity, req_approver_id);
 END;
-
+/
 DECLARE
   req_creator_id NUMBER := 2;
   req_approver_id NUMBER := 1;
@@ -1266,7 +1266,7 @@ DECLARE
 BEGIN
   PMS.usp_create_requisition(req_creator_id, reqi_desc, item_vendor_id, quantity, req_approver_id);
 END;
-
+/
 
 DECLARE
   req_creator_id NUMBER := 2;
@@ -1278,7 +1278,7 @@ DECLARE
 BEGIN
   PMS.usp_create_requisition(req_creator_id, reqi_desc, item_vendor_id, quantity, req_approver_id);
 END;
-
+/
 DECLARE
   req_creator_id NUMBER := 2;
   req_approver_id NUMBER := 1;
@@ -1289,7 +1289,7 @@ DECLARE
 BEGIN
   PMS.usp_create_requisition(req_creator_id, reqi_desc, item_vendor_id, quantity, req_approver_id);
 END;
-
+/
 DECLARE
   req_creator_id NUMBER := 2;
   req_approver_id NUMBER := 1;
@@ -1300,7 +1300,7 @@ DECLARE
 BEGIN
  PMS.usp_create_requisition(req_creator_id, reqi_desc, item_vendor_id, quantity, req_approver_id);
 END;
-
+/
 DECLARE
   req_creator_id NUMBER := 2;
   req_approver_id NUMBER := 1;
@@ -1311,7 +1311,7 @@ DECLARE
 BEGIN
   PMS.usp_create_requisition(req_creator_id, reqi_desc, item_vendor_id, quantity, req_approver_id);
 END;
-
+/
 DECLARE
   req_creator_id NUMBER := 2;
   req_approver_id NUMBER := 1;
@@ -1322,7 +1322,7 @@ DECLARE
 BEGIN
   PMS.usp_create_requisition(req_creator_id, reqi_desc, item_vendor_id, quantity, req_approver_id);
 END;
-
+/
 -- Update Requesition header status to approved & Purchase Order insert
 
 exec pms.usp_approve_requisition(1);
@@ -1577,7 +1577,6 @@ EXEC PMS.USP_GL_LEDGER_DATA (19, 47, 1002, to_date('1-Mar-23', 'DD-MON-RR'), 'De
 EXEC PMS.USP_GL_LEDGER_DATA (19, 48, 1003, to_date('1-Mar-23', 'DD-MON-RR'), 'Debit', 7000);
 EXEC PMS.USP_GL_LEDGER_DATA (19, 49, 1004, to_date('1-Mar-23', 'DD-MON-RR'), 'Debit', 24700);
 EXEC PMS.USP_GL_LEDGER_DATA (19, 50, 4000, to_date('1-Mar-23', 'DD-MON-RR'), 'Credit', -85000);
-
 
 
 
