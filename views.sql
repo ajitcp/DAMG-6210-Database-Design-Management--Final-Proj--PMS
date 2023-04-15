@@ -55,3 +55,32 @@ from pms.vendor v
 inner join pms.contact c on c.actor_id=v.vendor_id
 inner join pms.address a on a.actor_id=v.vendor_id
 where c.status='A' and a.status='A';
+
+
+CREATE VIEW PMS.FINANCIAL_REPORT_VIEW
+AS 
+select 
+jh.fiscal_year,
+jh.accounting_period,
+jl.account_id,
+a.account_type,
+a.account_name,
+sum(l.amount) as balance
+from pms.Ledger l
+inner join pms.account a
+on a.account_id=l.account_id
+inner join pms.journal_line jl
+on jl.jrnl_line_no=l.jrnl_line_no
+and jl.account_id=l.account_id
+inner join pms.journal_header jh
+on jh.jrnl_id=jl.jrnl_id
+where a.account_type in ('ASSET','LIABILITY','CAPITAL')
+group by jh.fiscal_year,jh.accounting_period,jl.account_id,a.account_type,a.account_name
+order by jh.fiscal_year,jh.accounting_period,jl.account_id,a.account_type,a.account_name;
+
+
+GRANT SELECT ON PMS.FINANCIAL_REPORT_VIEW TO public;
+GRANT SELECT ON PMS.FAVORITE_VENDOR_VIEW TO public;
+GRANT SELECT ON PMS.MOSTPURCHASEDITEMS TO public;
+GRANT SELECT ON PMS.PURCHASE_REPORT_VIEW TO public;
+GRANT SELECT ON PMS.VENDOR_DETAILS_VIEW TO public;
